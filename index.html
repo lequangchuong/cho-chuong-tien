@@ -1131,6 +1131,17 @@ if (submitWishBtn) {
     const list = [newWish, ...loadWishes()];
     saveWishes(list);
     renderWishList();
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'ce078278-641e-43c8-8f4a-98d4f42ae6c1',
+        subject: '💌 Lời chúc mới từ: ' + author,
+        from_name: author,
+        loi_chuc: text,
+        thoi_gian: new Date().toLocaleString('vi-VN')
+      })
+    }).catch(console.error);
     contentInput.value = '';
     dropFloatSymbols(['❤️', '✨', '💌', '💖']);
     toast('Đã gửi lời chúc! LE QUANG CHUONG cảm ơn bạn rất nhiều ❤️');
@@ -1215,6 +1226,19 @@ if (submitJobBtn) {
       jobs.unshift(jobItem);
       localStorage.setItem('anxin_jobs', JSON.stringify(jobs));
     } catch (_) {}
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'ce078278-641e-43c8-8f4a-98d4f42ae6c1',
+        subject: '💼 Giới thiệu việc làm: ' + title,
+        ten_cong_viec: title,
+        dia_diem: (locationInput.value || '').trim() || 'Không ghi rõ',
+        cach_lien_he: contact,
+        loi_nhan: (noteInput.value || '').trim() || 'Không có',
+        thoi_gian: new Date().toLocaleString('vi-VN')
+      })
+    }).catch(console.error);
     titleInput.value = '';
     locationInput.value = '';
     contactInput.value = '';
